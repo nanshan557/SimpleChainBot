@@ -92,9 +92,9 @@ run.sh
 **Linux / macOS：**
 
 ```bash
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 cp keys.example.txt keys.txt      # 配置私钥（必填）
 cp proxy.example.txt proxy.txt    # 配置代理（可选）
 python main.py
