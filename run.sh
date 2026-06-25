@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if ! python3 -m venv venv 2>/dev/null; then
+    echo "error please install python3-venv："
+    echo "  sudo apt install python3-venv"
+    exit 1
+fi
+
 if [ ! -d "venv" ]; then
     echo "Creating virtual environment..."
     python3 -m venv venv

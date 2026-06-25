@@ -82,6 +82,7 @@ run.bat
 **Linux：**
 
 ```bash
+sudo chmod +x run.sh
 run.sh
 ```
 
@@ -92,12 +93,12 @@ run.sh
 **Linux / macOS：**
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 cp keys.example.txt keys.txt      # 配置私钥（必填）
 cp proxy.example.txt proxy.txt    # 配置代理（可选）
-python main.py
+python3 main.py
 ```
 
 
@@ -105,12 +106,12 @@ python main.py
 **Windows：**
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 venv\Scripts\activate
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 copy keys.example.txt keys.txt     # 配置私钥（必填）
 copy proxy.example.txt proxy.txt   # 配置代理（可选）
-python main.py
+python3 main.py
 ```
 
 
