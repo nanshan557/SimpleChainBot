@@ -243,13 +243,13 @@ def run_wallet(private_key: str, proxy: Optional[str],
 
         tasks = get_tasks(session, token)
 
-        time.sleep(1)
-        do_visit(session, token, tasks)
-        time.sleep(DELAY_BETWEEN_TASKS)
-
-        do_checkin(session, token, tasks)
-        time.sleep(2)
-        log_user_stats(session, token)
+        # time.sleep(1)
+        # do_visit(session, token, tasks)
+        # time.sleep(DELAY_BETWEEN_TASKS)
+        #
+        # do_checkin(session, token, tasks)
+        # time.sleep(2)
+        # log_user_stats(session, token)
         return True
 
     except requests.HTTPError as e:
@@ -304,13 +304,16 @@ def sleep_with_countdown(target: datetime):
     ts = target.strftime("%Y-%m-%d %H:%M")
     logger.info(f"下次运行时间: {ts}")
     while True:
-        secs = (target - datetime.now(TZ)).total_seconds()
+        now = datetime.now(TZ)
+        secs = (target - now).total_seconds()
         if secs <= 0:
             break
         h = int(secs // 3600)
         m = int((secs % 3600) // 60)
-        logger.info(f"等待中: {h}小时 {m}分钟")
+        # 动态刷新行（\r 回到行首，end='' 不换行）
+        print(f"\r等待中: {h}小时 {m}分钟   ", end='', flush=True)
         time.sleep(60)
+    print()  # 倒计时结束后换行
     logger.info("等待结束，开始新一轮执行")
 
 def run_loop(keys_source, proxy_file: str):
@@ -330,9 +333,9 @@ def main():
     parser.add_argument("--proxy-file", metavar="文件", default=PROXY_FILE)
     args = parser.parse_args()
 
-    logger.info("═" * 54)
+    logger.info("=" * 54)
     logger.info("      Simple Chain Daily Bot")
-    logger.info("═" * 54)
+    logger.info("=" * 54)
 
     if args.key:
         run_loop([args.key], args.proxy_file)
